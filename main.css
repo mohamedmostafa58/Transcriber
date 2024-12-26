@@ -1,0 +1,299 @@
+:root {
+  --primary: #2563eb;
+  --bg-light: #f8fafc;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --border: #e2e8f0;
+  --white: #ffffff;
+  --success: #10b981;
+  --error: #ef4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  display: flex;
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 24px;
+  position: fixed;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: var(--primary);
+}
+
+.nav-item {
+  padding: 12px 16px;
+  margin: 4px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background: var(--bg-light);
+}
+
+.nav-item.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.main {
+  margin-left: 260px;
+  padding: 40px;
+  width: calc(100% - 260px);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.upload-zone {
+  background: var(--white);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.upload-zone:hover {
+  border-color: var(--primary);
+}
+
+.upload-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.file-input {
+  display: none;
+}
+
+.btn {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.file-info {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+  display: none;
+}
+
+.status {
+  margin-top: 16px;
+  color: var(--text-light);
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+  margin-right: 12px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.processing-status {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.transcript {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+}
+.transcript p {
+  margin: 1.5em 0;
+}
+
+.transcript strong {
+  font-weight: 600;
+  margin-right: 0.5em;
+}
+.speaker-mapping {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.speaker-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.speaker-item input {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+}
+
+.speaker-item input:focus {
+  border-color: var(--primary);
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.btn-secondary {
+  background: var(--bg-light);
+  color: var(--text);
+}
+
+.process-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.file-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-light);
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s ease;
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    rgba(37, 99, 235, 0.8) 50%,
+    var(--primary) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradient 2s linear infinite;
+}
+@keyframes gradient {
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: -100% 0%;
+  }
+}
+.upload-content {
+  margin-top: 24px;
+}
+
+.process-button {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.transcript-section {
+  margin-top: 24px;
+  display: none;
+}
+.copy-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.copy-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
