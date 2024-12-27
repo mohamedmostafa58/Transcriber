@@ -297,3 +297,84 @@ h2 {
   opacity: 1;
   transform: translateY(0);
 }
+/* responsivenss */
+.sidebar-toggle {
+  position: fixed;
+  left: 248px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-light);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed + .main {
+  margin-left: 0;
+  width: 100%;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  left: 10px;
+  transform: rotate(180deg);
+  z-index: 1111;
+}
+
+/* Update existing media queries */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    /* transform: translateX(-100%); */
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle {
+    top: 20px;
+    right: 20px;
+    position: fixed;
+    /* display: none; Hide the desktop toggle on mobile */
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar.collapsed + .main {
+    margin-left: 0;
+  }
+  .actions {
+    flex-direction: column;
+  }
+  .process-header {
+    display: block;
+  }
+}

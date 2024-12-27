@@ -255,3 +255,37 @@ function showNotification(notification, message) {
     notification.classList.remove("show");
   }, 2000);
 }
+//responsivenss
+// Sidebar toggle functionality
+const sidebarToggle = document.getElementById("sidebarToggle");
+const sidebar = document.getElementById("sidebar");
+const main = document.querySelector(".main");
+
+function toggleSidebar() {
+  sidebar.classList.toggle("collapsed");
+  // Save state to localStorage
+  localStorage.setItem(
+    "sidebarCollapsed",
+    sidebar.classList.contains("collapsed")
+  );
+}
+
+sidebarToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleSidebar();
+});
+
+// Restore sidebar state on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const sidebarCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+  if (sidebarCollapsed) {
+    sidebar.classList.add("collapsed");
+  }
+});
+
+// Handle window resize
+// window.addEventListener("resize", () => {
+//   if (window.innerWidth <= 768) {
+//     sidebar.classList.remove("collapsed");
+//   }
+// });
