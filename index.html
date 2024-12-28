@@ -23,6 +23,11 @@
 
       <div class="logo">Transcriber</div>
       <div class="nav-item active" onclick="showSection('upload')">Upload</div>
+      <!-- <div class="nav-item" onclick="showSection('dashboard')">Dashboard</div> -->
+      <div class="sidebar-history">
+        <h3 class="sidebar-title">Recent Transcripts</h3>
+        <div id="sidebarHistoryList" class="sidebar-history-list"></div>
+      </div>
     </div>
     <div class="main">
       <div class="container">
@@ -85,6 +90,37 @@
                 <div id="transcription"></div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="section" id="dashboardSection">
+          <div class="dashboard-header">
+            <h2>Transcript History</h2>
+          </div>
+
+          <div class="transcript-history">
+            <div
+              id="historyLoading"
+              class="loading-spinner-container"
+              style="display: none"
+            >
+              <div class="loading-spinner"></div>
+              <span>Loading transcripts...</span>
+            </div>
+
+            <div id="historyError" class="error-message" style="display: none">
+              Failed to load transcript history. Please try again.
+            </div>
+
+            <div id="historyEmpty" class="empty-state" style="display: none">
+              <div class="empty-icon">📝</div>
+              <h3>No Transcripts Yet</h3>
+              <p>
+                Your transcript history will appear here once you process some
+                files.
+              </p>
+            </div>
+
+            <div class="history-list" id="historyList"></div>
           </div>
         </div>
       </div>
