@@ -524,3 +524,46 @@ h2 {
   background: var(--primary);
   color: var(--white);
 }
+/* Add these to your main.css file */
+
+.upload-options {
+  margin-bottom: 24px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.btn-group .btn {
+  flex: 1;
+}
+
+.btn-group .btn.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.paste-zone {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.transcript-textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.transcript-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}

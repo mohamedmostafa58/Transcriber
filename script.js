@@ -77,6 +77,7 @@ function showSection(sectionName) {
     document.getElementById("uploadStatus").textContent = "";
     document.getElementById("processButton").disabled = true;
   } else if (sectionName === "dashboard") {
+    console.log("Dashboard section clicked");
     loadTranscriptHistory();
   }
 }
@@ -554,7 +555,7 @@ function validateTranscriptionData(data) {
 // updates
 function loadSidebarHistory() {
   const historyList = document.getElementById("sidebarHistoryList");
-
+  console.log("Loading sidebar history...");
   fetch(`${WORKER_URL}/api/transcript-history`)
     .then((response) => response.json())
     .then((data) => {
@@ -757,4 +758,76 @@ function showNotification(notification, message) {
       notification.style.display = "none";
     }, 300);
   }, 2000);
+}
+// Add these to your script.js file
+
+function switchUploadMode(mode) {
+  const fileZone = document.getElementById("fileUploadZone");
+  const pasteZone = document.getElementById("pasteUploadZone");
+  const buttons = document.querySelectorAll(".btn-group .btn");
+
+  buttons.forEach((btn) => btn.classList.remove("active"));
+
+  if (mode === "file") {
+    fileZone.style.display = "block";
+    pasteZone.style.display = "none";
+    buttons[0].classList.add("active");
+    document.getElementById("processButton").style.display = "block";
+  } else {
+    fileZone.style.display = "none";
+    pasteZone.style.display = "block";
+    buttons[1].classList.add("active");
+    document.getElementById("processButton").style.display = "none";
+  }
+
+  // Reset states
+  document.getElementById("transcriptSection").style.display = "none";
+  document.getElementById("fileInfo").style.display = "none";
+  document.getElementById("uploadStatus").textContent = "";
+}
+
+function processPastedTranscript() {
+  const textarea = document.getElementById("transcriptPaste");
+  const text = textarea.value.trim();
+
+  if (!text) {
+    uploadStatus.textContent = "Please paste some text first.";
+    return;
+  }
+
+  // Parse the text into utterances
+  const utterances = text
+    .split("\n")
+    .filter((line) => line.trim())
+    .map((line) => {
+      const [speaker, ...textParts] = line.split(":");
+      return {
+        speaker: speaker.trim(),
+        text: textParts.join(":").trim(),
+      };
+    });
+
+  // Create a transcript result object
+  transcriptionResult = {
+    utterances: utterances,
+  };
+
+  // Display the transcript using existing function
+  displayTranscription({ utterances });
+
+  // Save to database
+  const transcriptData = {
+    fileName: "Pasted Transcript",
+    fileSize: text.length,
+    fileType: "text/plain",
+    transcriptText: text,
+    created_at: new Date().toISOString(),
+    status: "completed",
+    language: "en",
+    user_id: "default",
+  };
+
+  saveTranscriptToDatabase(transcriptData).catch((error) => {
+    console.error("Failed to save pasted transcript:", error);
+  });
 }
