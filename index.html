@@ -32,8 +32,26 @@
     <div class="main">
       <div class="container">
         <div class="section active" id="uploadSection">
-          <div class="upload-zone" id="dropZone">
-            <div class="upload-icon">📁</div>
+          <div class="upload-options">
+            <div class="btn-group">
+              <button
+                class="btn btn-secondary active"
+                onclick="switchUploadMode('file')"
+              >
+                Upload File
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="switchUploadMode('paste')"
+              >
+                Paste Text
+              </button>
+            </div>
+          </div>
+
+          <!-- File Upload Zone -->
+          <div class="upload-zone" id="fileUploadZone">
+            <div class="upload-icon" id="dropZone">📁</div>
             <p>Drag and drop your file here or</p>
             <input type="file" id="fileInput" class="file-input" />
             <button
@@ -41,6 +59,21 @@
               onclick="document.getElementById('fileInput').click()"
             >
               Choose File
+            </button>
+          </div>
+
+          <!-- Text Paste Zone -->
+          <div class="paste-zone" id="pasteUploadZone" style="display: none">
+            <textarea
+              id="transcriptPaste"
+              placeholder="Paste your transcript here..."
+              class="transcript-textarea"
+            ></textarea>
+            <button
+              class="btn process-button"
+              onclick="processPastedTranscript()"
+            >
+              Process Text
             </button>
           </div>
 
