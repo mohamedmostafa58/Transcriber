@@ -858,7 +858,7 @@ function processPastedTranscript() {
     user_id: "default",
   };
 
-  saveTranscriptToDatabase(transcriptData).catch((error) => {
-    console.error("Failed to save pasted transcript:", error);
-  });
+  // saveTranscriptToDatabase(transcriptData).catch((error) => {
+  //   console.error("Failed to save pasted transcript:", error);
+  // });
 }
