@@ -795,24 +795,50 @@ function processPastedTranscript() {
     return;
   }
 
-  // Parse the text into utterances
-  const utterances = text
-    .split("\n")
-    .filter((line) => line.trim())
-    .map((line) => {
-      const [speaker, ...textParts] = line.split(":");
-      return {
-        speaker: speaker.trim(),
-        text: textParts.join(":").trim(),
-      };
+  // Split into lines and clean up empty lines
+  const lines = text.split("\n").filter((line) => line.trim());
+
+  // Initialize variables to track current speaker and collect utterances
+  let currentSpeaker = null;
+  let currentText = [];
+  const utterances = [];
+
+  // Process each line
+  lines.forEach((line) => {
+    const trimmedLine = line.trim();
+
+    // Check if line starts with "Speaker"
+    if (trimmedLine.match(/^Speaker\s+[A-Z]/i)) {
+      // If we have a previous speaker and text, save it
+      if (currentSpeaker && currentText.length > 0) {
+        utterances.push({
+          speaker: currentSpeaker,
+          text: currentText.join(" ").trim(),
+        });
+        currentText = [];
+      }
+      // Update current speaker
+      currentSpeaker = trimmedLine.split(/\s+/).slice(0, 2).join(" ");
+    } else if (currentSpeaker) {
+      // Add line to current text if we have a speaker
+      currentText.push(trimmedLine);
+    }
+  });
+
+  // Add final utterance if exists
+  if (currentSpeaker && currentText.length > 0) {
+    utterances.push({
+      speaker: currentSpeaker,
+      text: currentText.join(" ").trim(),
     });
+  }
 
   // Create a transcript result object
   transcriptionResult = {
     utterances: utterances,
   };
 
-  // Display the transcript using existing function
+  // Display the transcript
   displayTranscription({ utterances });
 
   // Save to database
@@ -820,7 +846,9 @@ function processPastedTranscript() {
     fileName: "Pasted Transcript",
     fileSize: text.length,
     fileType: "text/plain",
-    transcriptText: text,
+    transcriptText: utterances
+      .map((u) => `${u.speaker}\n${u.text}`)
+      .join("\n\n"),
     created_at: new Date().toISOString(),
     status: "completed",
     language: "en",
