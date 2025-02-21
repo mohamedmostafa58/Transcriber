@@ -213,11 +213,14 @@ h2 {
 }
 
 .btn-secondary {
-  background: #a5c2df;
+  background: #c6d6e4;
   color: var(--text);
   font-size: medium;
 }
-
+.btn-secondary:hover {
+  background: #a5c2df;
+  color: var(--text);
+}
 .process-header {
   display: flex;
   align-items: center;
