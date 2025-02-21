@@ -1,6 +1,6 @@
 :root {
   --primary: #2563eb;
-  --bg-light: #f8fafc;
+  --bg-light: #f1f4f7;
   --text: #1e293b;
   --text-light: #64748b;
   --border: #e2e8f0;
@@ -213,8 +213,9 @@ h2 {
 }
 
 .btn-secondary {
-  background: var(--bg-light);
+  background: #a5c2df;
   color: var(--text);
+  font-size: medium;
 }
 
 .process-header {

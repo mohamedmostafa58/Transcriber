@@ -61,7 +61,10 @@ function showSection(sectionName) {
   // Add active class to selected section and nav item
   document.getElementById(`${sectionName}Section`).classList.add("active");
   event.currentTarget.classList.add("active");
-
+  console.log(event.currentTarget.classList[0]);
+  if (event.currentTarget.classList[0] == "logo") {
+    document.getElementById("upload-nav").classList.add("active");
+  }
   // Hide history transcript section if exists
   const historyTranscriptSection = document.getElementById(
     "historyTranscriptSection"
